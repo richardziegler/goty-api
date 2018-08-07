@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(GameController.BASE_URL)
 public class GameController {
@@ -20,15 +21,23 @@ public class GameController {
         this.gameService = gameService;
     }
 
+
     @GetMapping
     List<Game> getAllGames(){
         return gameService.findAllGames();
     }
 
+    @GetMapping("/hello")
+    public String sayHello(){
+        return "Hello World";
+    }
+
+
     @GetMapping("/{id}")
     public Game getGameById(@PathVariable Integer id) {
         return gameService.findGameById(id);
     }
+
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
